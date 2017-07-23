@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">NBA News</string>
+    <string name="search_hint">Search..</string>
+    <string name="unknown_author">Unknown</string>
+    <string name="no_internet_connection">No internet connection!</string>
+    <string name="no_news_found">No News found.</string>
+</resources>

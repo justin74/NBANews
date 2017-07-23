@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/title_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="News Title"
+        android:textSize="@dimen/title_text_view_text_size"
+        android:layout_margin="@dimen/title_text_view_layout_margin"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Headline"/>
+
+    <TextView
+        android:id="@+id/author_text_view"
+        tools:text="Author"
+        style="@style/NewsAuthorDateTextView" />
+
+    <TextView
+        android:id="@+id/date_text_view"
+        style="@style/NewsAuthorDateTextView"
+        tools:text="July 21, 2017"
+        />
+
+</LinearLayout>
