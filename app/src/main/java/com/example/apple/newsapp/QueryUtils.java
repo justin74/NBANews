@@ -157,7 +157,7 @@ public final class QueryUtils {
                 JSONArray tagsArray = currentNews.getJSONArray(Constant.TAGS);
                 String author = "";
 
-                if (tagsArray.length() == 0){
+                if (tagsArray.length() == 0) {
                     author = application.getContext().getString(R.string.unknown_author);
                 } else {
                     for (int j = 0; j < tagsArray.length(); j++) {
@@ -175,7 +175,7 @@ public final class QueryUtils {
         return newsList;
     }
 
-    private static String formatDate(String date){
+    private static String formatDate(String date) {
         SimpleDateFormat jsonFormatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
         try {
             Date parsedDate = jsonFormatter.parse(date);

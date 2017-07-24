@@ -32,28 +32,7 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mNewsListView = (ListView) findViewById(R.id.list);
-        mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
-        mNewsListView.setEmptyView(mEmptyStateTextView);
-        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
-
-        mNewsAdapter = new NewsAdapter(this, new ArrayList<News>());
-        mNewsListView.setAdapter(mNewsAdapter);
-
-        mNewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                News currentNews = mNewsAdapter.getItem(position);
-
-                // 将字符串 URL 转换成 URI 对象（传递到 Intent 构造函数中）
-                Uri newsUri = Uri.parse(currentNews.getWebUrl());
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, newsUri);
-
-                // 发送 intent 以启动新活动
-                startActivity(websiteIntent);
-            }
-        });
+        initViews();
 
         // If there is a network connection, fetch data
         if (QueryUtils.isNetworkAvailable(this)) {
@@ -72,9 +51,35 @@ public class NewsActivity extends AppCompatActivity implements LoaderManager.Loa
             // Update empty state with no connection error message
             getLoaderManager().initLoader(Constant.NEWS_LOADER_ID, null, this);
             mEmptyStateTextView.setText(R.string.no_internet_connection);
-
-
         }
+    }
+
+    /**
+     * Initial view components.
+     */
+    private void initViews(){
+        mNewsListView = (ListView) findViewById(R.id.list);
+        mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
+        mNewsListView.setEmptyView(mEmptyStateTextView);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_refresh);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+
+        mNewsAdapter = new NewsAdapter(this, new ArrayList<News>());
+        mNewsListView.setAdapter(mNewsAdapter);
+
+        mNewsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
+                News currentNews = mNewsAdapter.getItem(position);
+
+                // 将字符串 URL 转换成 URI 对象（传递到 Intent 构造函数中）
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW);
+                websiteIntent.setData(Uri.parse(currentNews.getWebUrl()));
+
+                // 发送 intent 以启动新活动
+                startActivity(websiteIntent);
+            }
+        });
     }
 
     @Override

@@ -26,7 +26,7 @@ public class NewsLoader extends AsyncTaskLoader<List<News>> {
     }
 
     @Override
-    public List<News> loadInBackground() {
+    public List<News> loadInBackground(){
         Log.d(LOG_TAG, "load in background.");
         if (mUrl == null) {
             return null;
